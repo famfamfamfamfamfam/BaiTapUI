@@ -10,13 +10,15 @@ public class SpawnThings : MonoBehaviour
     public Transform[] cornerOutPoints;
     public GameObject prefab2;
 
+    List<GameObject> toRelease = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
         SpawnInside(cornerInPoints, prefab, 0);
         SpawnInside(cornerOutPoints, prefab2, 1);
     }
-    Vector3 jump(int i)
+    protected Vector3 jump(int i)
     {
         switch (i)
         {
@@ -27,9 +29,9 @@ public class SpawnThings : MonoBehaviour
             default: return new Vector3(0, 0, 0);
         }
     }
-    Vector3 doo;
+    protected Vector3 doo;
 
-    Vector3 howRotate(Transform[] cornerInPoints, int a, int i)
+    protected Vector3 howRotate(Transform[] cornerInPoints, int a, int i)
     {
         switch (a)
         {
@@ -37,13 +39,13 @@ public class SpawnThings : MonoBehaviour
             default: return cornerInPoints[i].right;
         }
     }
-    void SpawnInside(Transform[] cornerInPoints, GameObject prefab, int a)
+    protected void SpawnInside(Transform[] cornerInPoints, GameObject prefab, int a)
     {
         int t = 0;
         for (int i = 0; i < cornerInPoints.Length; i++)
         {
             doo = cornerInPoints[i].position;
-            Instantiate(prefab, doo + cornerInPoints[i].forward * 2.5f, Quaternion.LookRotation(howRotate(cornerInPoints, a, i)));
+            toRelease.Add(Instantiate(prefab, doo + cornerInPoints[i].forward * 2.5f, Quaternion.LookRotation(howRotate(cornerInPoints, a, i))));
             if (i < cornerInPoints.Length - 1)
             {
                 t = i + 1;
@@ -55,7 +57,7 @@ public class SpawnThings : MonoBehaviour
             while (Vector3.Distance(doo, cornerInPoints[t].position) > 5)
             {
                 doo += jump(i);
-                Instantiate(prefab, doo, Quaternion.LookRotation(howRotate(cornerInPoints, a, i)));
+                toRelease.Add(Instantiate(prefab, doo, Quaternion.LookRotation(howRotate(cornerInPoints, a, i))));
             }
         }
     }
@@ -64,5 +66,13 @@ public class SpawnThings : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnDestroy()
+    {
+        foreach (GameObject i in toRelease)
+        {
+            Destroy(i);
+        }
     }
 }

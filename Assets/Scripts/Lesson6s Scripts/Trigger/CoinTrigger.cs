@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EatLay : MonoBehaviour
+public class CoinTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,8 @@ public class EatLay : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GreenCarControl.fuel += 10;
+            GameManager.Instance.Score(1);
+            GameManager.Instance.Coins().Add(gameObject);
             gameObject.SetActive(false);
         }
     }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class SpawnItemRandomly : MonoBehaviour
 {
-
     [SerializeField]
     GameObject[] items;
+    [HideInInspector]
+    public List<GameObject> itemClones;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,11 +29,11 @@ public class SpawnItemRandomly : MonoBehaviour
             {
                 spawnPos = new Vector3(
                 Random.Range(-17.0f, 101.0f),
-                Random.Range(1/3f, 10.0f),
+                Random.Range(1.5f, 15.0f),
                 Random.Range(-17.0f, 113.0f));
             }
             while(isInTheArea(-6.5f,90.5f,-6.5f,102.5f,spawnPos));
-            Instantiate(items[Random.Range(0, items.Length)], spawnPos, Quaternion.identity);
+            itemClones.Add(Instantiate(items[Random.Range(0, items.Length)], spawnPos, Quaternion.identity));
 
             float timeWait = Random.Range(1,10);
             yield return new WaitForSeconds(timeWait);

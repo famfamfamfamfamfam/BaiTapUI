@@ -60,20 +60,28 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.49f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\EnemyRun.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\Follower.cs" />
     <Compile Include="Assets\Scripts\PhysicComponent.cs" />
     <Compile Include="Assets\Scripts\CarControl.cs" />
-    <Compile Include="Assets\Scripts\Lesson6s Scripts\EatLay.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\SetUpGameMap\SpawnItemRandomly.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\Trigger\GateTrigger.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\Trigger\HurtLayButTrigger.cs" />
+    <Compile Include="Assets\Scripts\MainCam.cs" />
     <Compile Include="Assets\Scripts\OrderManager.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\SetUpGameMap\SpawnThings.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\Trigger\EatLay.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\SetUpGameMap\SetUpCoins.cs" />
     <Compile Include="Assets\Scripts\WPManager.cs" />
     <Compile Include="Assets\Scripts\IPlayMethod.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\Trigger\CoinTrigger.cs" />
     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
-    <Compile Include="Assets\Scripts\Lesson6s Scripts\SpawnThings.cs" />
     <Compile Include="Assets\Scripts\TestDungsCode.cs" />
+    <Compile Include="Assets\Scripts\Lesson6s Scripts\SetUpGameMap\RemoveItem.cs" />
     <Compile Include="Assets\Scripts\Lesson6s Scripts\CamControl.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Lesson6s Scripts\GateTrigger.cs" />
-    <Compile Include="Assets\Scripts\Lesson6s Scripts\HurtLayButTrigger.cs" />
-    <Compile Include="Assets\Scripts\Lesson6s Scripts\SpawnItemRandomly.cs" />
+    <Compile Include="Assets\Scripts\MousePositionControl.cs" />
     <Compile Include="Assets\Scripts\Lesson6s Scripts\GreenCarControl.cs" />
     <Compile Include="Assets\Scripts\MovezController.cs" />
   </ItemGroup>

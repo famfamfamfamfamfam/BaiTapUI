@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,10 +19,9 @@ public class GreenCarControl : MonoBehaviour
     [Range(1200, 2000)]
     float turnSpeed;
     float turn, move;
-    public static float damaged = 0;
-    public static float fuel = 100;
-    public static float capacity = 100;
-    public static int laps = -1;
+    //public static float damaged = 0;
+    //public static float fuel = 100;
+    //public static int laps = 0;
     bool getIt = false;
 
     int stuffLayerID;
@@ -45,8 +45,7 @@ public class GreenCarControl : MonoBehaviour
     }
     void FixedUpdate()
     {
-        //them joint
-        if (fuel >= 20)
+        if (GameManager.Instance.getFuel() >= 20)
         {
             rb.AddForce(transform.forward * speed * move);
             rb.AddTorque(transform.up * turn * turnSpeed);
@@ -54,19 +53,37 @@ public class GreenCarControl : MonoBehaviour
 
         if (getIt)
         {
-            rb.AddForce(Vector3.up * 7.5f, ForceMode.VelocityChange);
-            getIt = false;
+            if (transform.position.y < 7)
+            {
+                rb.AddForce(Vector3.up * 7.5f, ForceMode.VelocityChange);
+                getIt = false;
+            }
         }
     }
     private void OnCollisionEnter(Collision collision)
     {
+        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         if (collision.gameObject.layer == stuffLayerID)
         {
-            if (damaged == 100)
+            if (GameManager.Instance.getDamaged() == 95)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
-            damaged += 5;
+            GameManager.Instance.setDamaged(GameManager.Instance.getDamaged() + 5);
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (GameManager.Instance.GetFlag())
+        {
+            if (collision.gameObject == GameManager.Instance.AllPaths()[GameManager.Instance.Index()])
+            {
+                GameManager.Instance.Index(GameManager.Instance.Index() + 1);
+                if (GameManager.Instance.Index() == 4)
+                {
+                    GameManager.Instance.SetFlag(false);
+                }
+            }
         }
     }
 }

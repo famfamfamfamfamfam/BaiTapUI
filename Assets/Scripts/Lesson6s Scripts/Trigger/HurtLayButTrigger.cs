@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GateTrigger : MonoBehaviour
+public class HurtLayButTrigger : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -20,9 +20,11 @@ public class GateTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GreenCarControl.laps += 1;
-            GreenCarControl.fuel -= 20;
+            GameManager.Instance.setFuel(5);
+            //GreenCarControl.fuel -= 5;
+            GameManager.Instance.setDamaged(GameManager.Instance.getDamaged() + 5);
+            gameObject.SetActive(false);
         }
-        Debug.Log(GreenCarControl.laps);
     }
+
 }
