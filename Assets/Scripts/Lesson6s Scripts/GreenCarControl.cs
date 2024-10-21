@@ -60,9 +60,15 @@ public class GreenCarControl : MonoBehaviour
             }
         }
     }
+
+    public float getSpeed()
+    {
+        return Math.Abs(speed * move * 0.02f);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         if (collision.gameObject.layer == stuffLayerID)
         {
             if (GameManager.Instance.getDamaged() == 95)

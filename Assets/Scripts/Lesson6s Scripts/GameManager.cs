@@ -1,10 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public delegate void NumsChange(string check);
+    public event NumsChange numsChange;
+
     int score = 0;
     List<GameObject> coins = new List<GameObject>();
     [SerializeField]
@@ -20,6 +24,7 @@ public class GameManager : MonoBehaviour
     public void Score(int score)
     {
         this.score += score;
+        numsChange?.Invoke("forCoins");
     }
 
     public List<GameObject> Coins()
@@ -57,6 +62,7 @@ public class GameManager : MonoBehaviour
     public void setDamaged(float addedDamage)
     {
         damaged = addedDamage;
+        numsChange?.Invoke("forHealth");
     }
 
     float fuel = 100;
@@ -64,6 +70,7 @@ public class GameManager : MonoBehaviour
     public void setFuel(int minusValue)
     {
         fuel -= minusValue;
+        numsChange?.Invoke("forFuel");
     }
 
     int laps = 0;
@@ -71,17 +78,27 @@ public class GameManager : MonoBehaviour
     public void setLaps(int plusValue)
     {
         laps += plusValue;
+        numsChange?.Invoke("forLaps");
+    }
+    private void Awake()
+    {
+        instance = GetComponent<GameManager>();
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        instance = GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public int GetScored()
+    {
+        return score;
     }
 }
